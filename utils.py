@@ -1,5 +1,5 @@
 """
-Copyrights (c) 2022 - Panakeia Technologies Limited
+Copyright (c) 2022- Panakeia Technologies Limited
 Software licensed under GNU General Public License (GPL) version 3
 
 Misc utility functions.

@@ -1,5 +1,5 @@
 """
-Copyrights (c) 2022 - Panakeia Technologies Limited
+Copyright (c) 2022- Panakeia Technologies Limited
 Software licensed under GNU General Public License (GPL) version 3
 
 Pytorch Dataset and DataLoader implementations for tile-based profiler models.

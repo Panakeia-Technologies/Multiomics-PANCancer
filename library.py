@@ -1,5 +1,5 @@
 """
-Copyrights (c) 2022 - Panakeia Technologies Limited
+Copyright (c) 2022- Panakeia Technologies Limited
 Software licensed under GNU General Public License (GPL) version 3
 
 A module for loading pickled data files from the disk into memory and transforming them into a format that can be

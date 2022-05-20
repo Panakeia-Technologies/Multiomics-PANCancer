@@ -132,7 +132,7 @@ The run time of the code depends on various factors, such as type of GPU, input 
 In our test environment it took ~30 seconds to validate a model on an image with 1250 tiles.
 
 ## Copyright 
-Copyrights (c) 2022 - Panakeia Technologies Limited
+Copyright (c) 2022- Panakeia Technologies Limited
 
 ## Licence
 Software licensed under GNU General Public License (GPL) version 3
