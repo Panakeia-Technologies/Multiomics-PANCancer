@@ -183,7 +183,7 @@ class EncoderDecoderEstimator:
     
     def save_model(self, local_file_path, epoch=None):
         """
-        Saves model checkpoint, which may include weights of model / optimizer / lr scheduler / calibrator
+        Saves model checkpoint, which may include weights of model weights, optimizer and epoch
 
         :param local_file_path: (str) name of the local filepath to save model to
         :param epoch: (int?) optional. Gives current epoch of training/validation
