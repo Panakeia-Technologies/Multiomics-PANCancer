@@ -241,12 +241,7 @@ def update_model_weights(model, path_to_weights, is_cuda=True):
     :param model: (model) pytorch model
     :param path_to_weights: (str) local path to where the weights are stored
     :param is_cuda: (bool) whether cuda is available
-    :return: (tuple<torch.nn.module, TemperatureScaling, tuple<float, float>>)
-        - model with updated weights
-        - temperature scaler with updated params, if a temperature scaler was provided as a parameter and if temperature
-            scaling params have been stored in the baseline model file path provided
-        - An interval (a, b) contained in [0, 1] such that model claims to be uncertain if a prediction score falls
-            within this interval, if such an interval is stored in the baseline model file path provided
+    :return: model: (torch.nn.module) model with updated weights
     """
 
     if is_cuda:
