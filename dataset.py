@@ -45,7 +45,7 @@ class TileDataset(data.Dataset):
         Sample m tiles from each slide where m = num_tiles_per_slide. If replacement is False and a slide
         has fewer tiles than m, then use all tiles.
 
-        :return (list<Tile>)
+        :return (list<Tile>): List of Tile objects
         """
 
         tile_pool = []
@@ -105,7 +105,7 @@ def get_tile_dataloader(mode, dataset, batch_size, shuffle=False, weighted_sampl
     :param batch_size: (int) of the data loader
     :param shuffle: (bool) turns on shuffling during data loading; only supported for mode 'train'
     :param weighted_sampling: (bool) whether to perform weighted sampling; only supported for mode 'train'
-    :param drop_last: (bool) whether to drop the last batch; not possible if mode is 'predict'
+    :param drop_last: (bool) whether to drop the last batch
     :return: (torch.utils.data.DataLoader) for segmentation based iteration
     """
     if mode == 'train':

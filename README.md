@@ -1,4 +1,4 @@
-# Deep learning can predict multi-omic biomarkers from routine pathology images: A systematic pan-cancer study
+# A systematic pan-cancer study on deep learning-based prediction of multi-omic biomarkers from routine pathology images
 
 This repo contains the codebase to train and validate an encoder-decoder model for predicting the status of
  a multi-omic biomarker. It has been used to train and validate the 12,093 DL models predicting 4,031

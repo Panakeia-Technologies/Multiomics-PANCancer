@@ -78,8 +78,7 @@ class DataLibrary:
     @staticmethod
     def extract_tiles_from_tile_dict(tile_dict, image_uuid, image_target):
         """
-        Extracts raw tile images in the form of np arrays fore core dict, saves them in .npy files and register their
-        file paths with the memory manager
+        Extracts raw tile images in the form of np arrays and convert to Tile objects.
 
         :param tile_dict: (dict) containing raw tile images as np arrays
         :param image_uuid: (str) image uuid of the slide represented by given core dict
@@ -117,6 +116,7 @@ class DataLibrary:
     def get_slide_indices(self):
         """
         Returns the indices of all slides managed by the data library.
+
         :return: (list<int>) the list of all slide indices
         """
         return list(range(len(self.slides)))

@@ -2,7 +2,7 @@
 Copyright (c) 2022- Panakeia Technologies Limited
 Software licensed under GNU General Public License (GPL) version 3
 
-Module for providing an API for training, and validation routines for encoder-decoder models.
+Module for providing an API for training and validation routines for encoder-decoder models.
 """
 
 import numpy as np
@@ -15,18 +15,18 @@ from models import get_scores_preds_targets
 
 class EncoderDecoderEstimator:
     """
-    An Estimator class for training, validation, and feature extraction routines, specific to auto-encoder models
+    An Estimator class for training, validation, and feature extraction routines, specific to encoder models
     for classification with multi-loss.
 
     :param model: (torch.nn.Module) the multi-loss encoder-decoder model used to classify tiles
     :param is_cuda: (bool) whether to use CUDA
     :param tile_datasets: (dict) of TileDataset objects 
-    :param pred_batch_size: (int) batch size for the train / pred / val step after the inference step
+    :param pred_batch_size: (int) batch size for the train / val step after the inference step
     :param optimizer: (torch.optim.Optimizer) optimizer used in training loop; only needed for train
-    :param cls_criterion: (torch.nn) loss function for classification; only needed for train and val
-    :param reconst_criterion: (torch.nn) loss function for reconstruction; only needed for train and val
-    :param alpha: (float) weighting multiplier for the classifier loss; only needed for train and val
-    :param beta: (float) weighting multiplier for the reconstruction loss; only needed for train and val
+    :param cls_criterion: (torch.nn) loss function for classification
+    :param reconst_criterion: (torch.nn) loss function for reconstruction
+    :param alpha: (float) weighting multiplier for the classifier loss
+    :param beta: (float) weighting multiplier for the reconstruction loss
     :param num_classes: (int) number of model output classes
     """
 
@@ -52,7 +52,7 @@ class EncoderDecoderEstimator:
         A function that computes reconstruction and classification losses
         
         :param model_out: (dict of torch.Tensors) dict of model outputs including reconstruct_out, classifier_out,
-            latent_vector, logvar
+            latent_vector
         :param inputs: (torch.Tensor) tile patches as inputs
         :param target: (torch.Tensor) class labels
         :return: loss, reconstruct_loss, cls_loss
@@ -68,7 +68,7 @@ class EncoderDecoderEstimator:
 
         :param data_loader: (torch.utils.data.DataLoader) data loader for generating batches
         :return: (EncoderDecoderEstimatorResults) corresponding to epoch loss, model scores, model
-                predictions, true labels, and dictionary for individual losses, respectively.
+                predictions, true labels, and dictionary for individual losses.
         """
                 
         print(f'---> Training ({len(data_loader)} batches)')
@@ -106,7 +106,7 @@ class EncoderDecoderEstimator:
 
         :param data_loader: (torch.utils.data.DataLoader) data loader for generating batches
         :return: (EncoderDecoderEstimatorResults) corresponding to epoch loss, model scores, model
-                predictions, true labels, and dictionary for individual losses, respectively.
+                predictions, true labels, and dictionary for individual losses.
         """
         if self.tile_datasets is None or 'val' not in self.tile_datasets:
             raise ValueError("For the 'validate' function 'tile_datasets['val']' needs to be provided.")
@@ -168,7 +168,7 @@ class EncoderDecoderEstimator:
                 slide.aggregate_tile_results()
                 slide_level_results.slide_uuids.append(uuid)
                 if not all(tile.target == slide.tiles[0].target for tile in slide.tiles):
-                    raise ValueError('Got differing values of tile targets from the same slide')
+                    raise ValueError('Got different values of tile targets from the same slide')
                 else:
                     target = slide.tiles[0].target
                 slide_level_results.y_true.append(target)
@@ -200,8 +200,8 @@ class EncoderDecoderEstimator:
             
 class EstimatorResults:
     """
-    An EstimatorResults object is responsible for keeping track of all the results produced by a model training,
-    validation or prediction step run by an Estimator object.
+    An EstimatorResults object is responsible for keeping track of all the results produced by a model training
+    and validation step run by an Estimator object.
     """
 
     def __init__(self):
@@ -266,8 +266,7 @@ class ImageLevelEstimatorResults(EstimatorResults):
 
     def add_pre_aggregation_results(self, pre_aggregation_results):
         """
-        Function for recording pre-aggregation results which we may want to save for E&I purposes later on
-        e.g. tile-level results
+        Function for recording pre-aggregation results
 
         :param pre_aggregation_results: (EstimatorResults) results objects produced before aggregation
         """
@@ -304,7 +303,7 @@ class ImageLevelEstimatorResults(EstimatorResults):
 
 class EncoderDecoderEstimatorResults(EstimatorResults):
     """
-    Data class for processing the batched estimator results in train, validate, feature_extraction and predict, and
+    Data class for processing the batched estimator results in train, validate, and feature_extraction, and
     providing them in a concise format.
     """
 
